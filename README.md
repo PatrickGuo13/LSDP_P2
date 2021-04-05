@@ -6,12 +6,14 @@ You'll be submitting a report along with your code that provides commentary on t
 1. **(3 points)** Implement the `exact_F2` function. The function accepts an RDD of strings as an input. The output should be exactly `F2 = sum(Fs^2)`, where `Fs` is the number of occurrences of plate `s` and the sum is taken over all plates. This can be achieved in one line using the `map` and `reduceByKey` methods of the RDD class. Run `exact_F2` locally **and** on GCP with 1 driver and 4 machines having 2 x N1 cores. Copy the results to your report. Terminate the program if it runs for longer than 30 minutes.
 
 code:
+'''
 def exact_F2(x: RDD[String]) : Long = {
   val pairRdd = x.map(a=>(a,1))
   val f2 = pairRdd.reduceByKey(_ + _)
   val result=f2.map(i=>scala.math.pow(i._2,2)).reduce(_+_)
   return result.toLong
 }
+'''
 ------------------------------------------------------------------
 Output:
 Local:
